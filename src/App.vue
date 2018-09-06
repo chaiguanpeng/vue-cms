@@ -45,8 +45,8 @@ export default {
       this.$nextTick(function () {
         console.log(this.selected);
         this.$router.push({
-              name:this.selected
-            })
+          name:this.selected
+        })
       })
     }
   }
@@ -64,5 +64,6 @@ export default {
 }
   #app .content{
     margin-top: 40px;
+    margin-bottom: 55px;
   }
 </style>

@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import Axios from 'axios'
 //配置公共URL
-Axios.defaults.baseURL = "https://www.sinya.online/api/"
+Axios.defaults.baseURL = "https://www.sinya.online/api"
 Vue.prototype.$axios = Axios
 //配置mint-ui
 import MintUI from 'mint-ui'

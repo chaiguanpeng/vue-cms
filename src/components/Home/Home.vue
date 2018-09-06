@@ -24,7 +24,7 @@
             imgs:[], //轮播图数据
             grids:[
               {title:"新闻资讯",classname:'p-1',router:{name:'news.list'}},
-              {title:"图文分享",classname:'p-2',router:{name:'news.list'}},
+              {title:"图文分享",classname:'p-2',router:{name:'photo.list',params:{categoryId:0}}},
               {title:"商品展示",classname:'p-3',router:{name:'news.list'}},
               {title:"留言反馈",classname:'p-4',router:{name:'news.list'}},
               {title:"搜索资讯",classname:'p-5',router:{name:'news.list'}},

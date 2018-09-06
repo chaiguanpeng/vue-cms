@@ -11,3 +11,8 @@ a{
 .mint-tabbar{
   position: fixed;
 }
+img{
+  width: 100%;
+  height: auto;
+  border: none;
+}
