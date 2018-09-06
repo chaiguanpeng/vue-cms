@@ -1,0 +1,13 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+ul,li,dl,dt,dd,ol{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+.mint-tabbar{
+  position: fixed;
+}

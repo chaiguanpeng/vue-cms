@@ -1,28 +1,27 @@
 <template>
   <div id="app">
-    <mt-header fixed title="fixed top">信息管理系统</mt-header>
+    <mt-header fixed title="信息管理系统"></mt-header>
     <div class="content"><router-view /></div>
     <mt-tabbar v-model="selected">
       <mt-tab-item id="home">
-        <img slot="icon" src="./assets/img/index.png">
-        首页
+          <img slot="icon" src="./assets/img/index.png" @click="hashChange">
+          首页
       </mt-tab-item>
       <mt-tab-item id="member">
-        <img slot="icon" src="./assets/img/vip.png">
+        <img slot="icon" src="./assets/img/vip.png" @click="hashChange">
         vip
       </mt-tab-item>
       <mt-tab-item id="shopcart">
-        <img slot="icon" src="./assets/img/shopcart.png">
+        <img slot="icon" src="./assets/img/shopcart.png" @click="hashChange">
         购物车
       </mt-tab-item>
       <mt-tab-item id="search">
-        <img slot="icon" src="./assets/img/search.png">
+        <img slot="icon" src="./assets/img/search.png" @click="hashChange">
         搜索
       </mt-tab-item>
     </mt-tabbar>
   </div>
 </template>
-
 <script>
 export default {
   name: 'App',
@@ -32,10 +31,22 @@ export default {
     }
   },
   watch:{
-    selected(newV,oldV){
-      console.log(newV,oldV);
-      this.$router.push({
-        name:newV
+    //此方法不足
+    // selected(newV,oldV){
+    //   console.log(newV,oldV);
+    //   this.$router.push({
+    //     name:newV
+    //   })
+    // }
+  },
+  methods:{
+    hashChange(){
+      //在vue完成渲染任务以后的行为
+      this.$nextTick(function () {
+        console.log(this.selected);
+        this.$router.push({
+              name:this.selected
+            })
       })
     }
   }
@@ -52,6 +63,6 @@ export default {
   /*margin-top: 60px;*/
 }
   #app .content{
-    margin-top: 50px;
+    margin-top: 40px;
   }
 </style>
