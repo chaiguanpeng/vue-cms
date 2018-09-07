@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        name: "my-ui"
+      name: "my-ui"
     }
 </script>
 
@@ -18,4 +18,5 @@
     justify-content: center;
     align-items: center;
   }
+
 </style>

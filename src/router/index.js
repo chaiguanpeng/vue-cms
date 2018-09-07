@@ -7,6 +7,9 @@ import Shopcart from '@/components/Shopcart/Shopcart'
 import NewsList from '@/components/News/NewsList'
 import NewsDetail from "@/components/NewsDetail/NewsDetail"
 import PhotoList from "@/components/Photo/PhotoList"
+import PhotoDetail from "@/components/Photo/PhotoDetail"
+
+
 Vue.use(Router); //注册全局组件 router-view route-link
 
 export default new Router({
@@ -51,6 +54,12 @@ export default new Router({
       name:'photo.list',
       path:'/photo/list/:categoryId',
       component:PhotoList
+    },
+    //图片详情
+    {
+      name:'photo.detail',
+      path:'/photo/detail', //查询字符串不需要声明 /:id之类的
+      component:PhotoDetail
     }
   ]
 })

@@ -9,10 +9,21 @@ a{
   text-decoration: none;
 }
 .mint-tabbar{
-  position: fixed;
+  position: fixed !important;
 }
 img{
   width: 100%;
   height: auto;
   border: none;
+}
+/*photoDetail中*/
+.photo-pic{
+  overflow: hidden;
+}
+.photo-pic figure {
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin-left: 8px;
+  margin-bottom: 10px;
 }
