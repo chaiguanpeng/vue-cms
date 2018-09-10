@@ -19,10 +19,13 @@
           </li>
           <li>
             <mt-button type="primary">立即购买</mt-button>
-            <mt-button type="danger">加入购物车</mt-button>
+            <mt-button type="danger" @click="insertBall">加入购物车</mt-button>
           </li>
         </ul>
       </div>
+      <transition  v-on:after-enter="afterEnter" name="ball">
+        <div class="ball" v-if="isExist"></div>
+      </transition>
       <div class="product-props">
         <ul>
           <li>商品参数</li>
@@ -49,7 +52,8 @@
       name: "GoodsDetail",
       data(){
         return{
-          goodsInfo:''  //商品详情信息
+          goodsInfo:'',  //商品详情信息
+          isExist:false
         }
       },
       created(){
@@ -59,11 +63,20 @@
         }).catch(err=>{
           console.log("评论获取失败",err);
         });
+      },
+      methods:{
+        insertBall(){
+          this.isExist = true;
+        },
+        afterEnter(){
+          this.isExist = false; //移除元素
+        }
       }
     }
 </script>
 
 <style scoped lang="less">
+
   .outer-swiper{
     .swiper{
       height: 250px;
@@ -71,6 +84,7 @@
     }
   }
   .product-desc{
+    margin-bottom: 50px;
     ul li{
       margin-top: 15px;
       .product-desc-span{
@@ -97,6 +111,7 @@
     }
   }
   .product-props{
+    margin-top: 50px;
     li{
       margin-top: 10px;
       color: #333;
@@ -106,6 +121,33 @@
     li{
       margin-top: 8px;
       font-size: 16px;
+    }
+  }
+  .ball{
+    width: 30px;
+    margin: 0 auto;
+    height: 30px;
+    border-radius: 15px;
+    background: red;
+  }
+  .ball-enter-active{
+    animation: bounce-in 1s;
+  }
+  .ball-leave{
+    opacity: 0;
+  }
+  @keyframes bounce-in {
+    0%{
+      transform: translate3d(0,0,0);
+    }
+    50%{
+      transform: translate3d(140px,-50px,0);
+    }
+    75%{
+      transform: translate3d(160px,0px,0);
+    }
+    100%{
+      transform: translate3d(140px,300px,0);
     }
   }
 </style>
