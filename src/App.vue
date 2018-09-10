@@ -43,7 +43,7 @@ export default {
     hashChange(){
       //在vue完成渲染任务以后的行为
       this.$nextTick(function () {
-        console.log(this.selected);
+        // console.log(this.selected);
         this.$router.push({
           name:this.selected
         })

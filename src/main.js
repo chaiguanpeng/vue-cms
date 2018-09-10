@@ -3,10 +3,35 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+//配置mint-ui
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+Vue.use(MintUI)
 import Axios from 'axios'
 //配置公共URL
 Axios.defaults.baseURL = "https://www.sinya.online/api"
 Vue.prototype.$axios = Axios
+//配置请求拦截器，显示loading图标
+Axios.interceptors.request.use((config)=>{
+  MintUI.Indicator.open({
+    text: '拼命加载中',
+    spinnerType: 'fading-circle'
+  });
+  return config
+});
+//配置响应拦截器，关闭loading图标
+Axios.interceptors.response.use((response)=>{
+  //response.config类似上面 config
+  MintUI.Indicator.close();
+  return response
+});
+
+
+
+
+
+
+
 // 引入自己css
 import './assets/css/global.css'
 Vue.config.productionTip = false
@@ -23,13 +48,12 @@ Vue.config.productionTip = false
   import VuePreview from 'vue-preview'
   // defalut install
   Vue.use(VuePreview);
-  //配置mint-ui
-  import MintUI from 'mint-ui'
-  import 'mint-ui/lib/style.css'
-  Vue.use(MintUI)
   //评论组件
   import Comment from "@/components/common/Comment"
-  Vue.component(Comment.name,Comment)
+  Vue.component(Comment.name,Comment);
+  //注册全局轮播组件
+  import MySwipe from "@/components/common/MySwipe"
+  Vue.component(MySwipe.name,MySwipe)
 //全局组件结束
 
 
@@ -50,6 +74,13 @@ Vue.filter("relativeTime",function (data, previousTime) {
   // console.log(formatStr);
   return Moment(previousTime).fromNow();
 });
+//处理字符串过长的过滤器
+Vue.filter('convertStr',function (str, count) {
+  return str.substring(0,count) + '...'
+});
+
+
+
 
 /* eslint-disable no-new */
 new Vue({
