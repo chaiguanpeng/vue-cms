@@ -1,7 +1,13 @@
 <template>
   <div id="app">
     <mt-header fixed title="信息管理系统"></mt-header>
-    <div class="content"><router-view /></div>
+
+    <!--加动画-->
+      <div class="content">
+        <transition name="rv" mode="out-in">
+           <router-view />
+        </transition>
+      </div>
     <mt-tabbar v-model="selected">
       <mt-tab-item id="home">
           <img slot="icon" src="./assets/img/index.png" @click="hashChange">
@@ -78,4 +84,10 @@ export default {
     margin-top: 40px;
     margin-bottom: 55px;
   }
+  .rv-enter-active,.rv-leave-active{
+    transition: opacity .5s;
+  }
+.rv-enter, .rv-leave-to {
+  opacity: 0;
+}
 </style>

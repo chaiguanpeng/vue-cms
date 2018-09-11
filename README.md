@@ -15,7 +15,8 @@
 - :bottom-method="loadBottom" 拉动函数
 - :bottom-all-loaded="isAllLoaded" 为true时终结拉动函数的调用
 - this.$refs.loadmore.onBottomLoaded(); 通知元素重新定位
-
+## config/index.js
+- productionSourceMap改成false可以取消打包生成的map文件
 > A Vue.js project
 
 ## Build Setup
