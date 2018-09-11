@@ -1,6 +1,6 @@
 <template>
     <div>
-      <nav-bar title="新闻详情"/>
+      <nav-bar :title="title"/>
       <div class="news-title">
         <p>{{newsDetail.title}}</p>
         <div>
@@ -18,7 +18,8 @@
       name: "NewsDetail",
       data(){
         return{
-          newsDetail:""  //新闻详情
+          newsDetail:"" , //新闻详情
+          title:""        //变化的标题
         }
       },
       created(){
@@ -31,7 +32,32 @@
         }).catch(err=>{
           console.log("新闻详情错误",err);
         })
+      },
+      beforeRouteEnter (to, from, next) {  //路由导航守卫：
+        //1、判断from 万一from的name是空，说明是粘贴地址栏
+        //     1.1继续判断，根据to来设置title
+        //2、如果from 是新闻列表 就给title为新闻详情
+        //3、如果from 是商品详情,就给title为商品图文介绍
 
+        // console.log("to",to);
+        // console.log("from",from);
+        let title = '';
+        if(from.name==null){
+          if(to.name ==='news.detail'){
+            title = "新闻详情";
+          }else if(to.name==='photo.info'){
+            title = '商品图文介绍';
+          }
+        }else if(from.name ==="news.list"){
+          title='新闻详情';
+        }else if(from.name==='goods.detail'){
+          title = '商品图文介绍'
+        }
+        //最终都放行
+        next(vm => {
+          // 通过 `vm` 访问组件实例
+          vm.title=title;
+        })
       }
 
     }

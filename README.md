@@ -2,7 +2,8 @@
 ## 用到的插件
 - mint-ui
 - vue-preview 缩略图插件
-- 
+## EventBus，商品详情页数量传递给首页
+- 注释在EventBus.js中
 ## 父子组件样式总结
 - 父不管子
 - 子管自己

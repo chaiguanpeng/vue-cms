@@ -13,7 +13,7 @@
       </mt-tab-item>
       <mt-tab-item id="shopcart">
         <img slot="icon" src="./assets/img/shopcart.png" @click="hashChange">
-        购物车
+        购物车 <mt-badge type="error"  size="small">{{num}}</mt-badge>
       </mt-tab-item>
       <mt-tab-item id="search">
         <img slot="icon" src="./assets/img/search.png" @click="hashChange">
@@ -23,11 +23,23 @@
   </div>
 </template>
 <script>
+  import EventBus from './EventBus';
+  import GoodsTool from "./GoodsTools"
 export default {
   name: 'App',
+  created(){
+    // 初始化小球的数量
+    this.num = GoodsTool.getTolCount();
+    //订阅购物车的数量
+    EventBus.$on('addShopcart',(data)=> {
+      this.num=data;
+    });
+
+  },
   data(){
     return {
-      selected:""
+      selected:"",
+      num:5 //goodsDetail中增加购物车的数量
     }
   },
   watch:{

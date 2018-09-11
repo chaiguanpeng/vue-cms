@@ -15,7 +15,7 @@
             <s>¥{{goodsInfo.market_price}}</s>销售价: <span>¥{{goodsInfo.sell_price}}</span>
           </li>
           <li class="number-li">
-            购买数量: <span class="s-1">-</span>1 <span class="s-2">+</span>
+            购买数量: <span class="s-1" @click="substract">-</span>{{pickNum}} <span class="s-2" @click="add">+</span>
           </li>
           <li>
             <mt-button type="primary">立即购买</mt-button>
@@ -37,10 +37,10 @@
       <div class="product-info">
         <ul>
           <li>
-            <mt-button type="primary" size="large" plain>图文介绍</mt-button>
+            <mt-button type="primary" size="large" plain @click="showPhotoInfo">图文介绍</mt-button>
           </li>
           <li>
-            <mt-button type="primary" size="large" plain>商品评论</mt-button>
+            <mt-button type="primary" size="large" plain @click="goodsComment">商品评论</mt-button>
           </li>
         </ul>
       </div>
@@ -48,12 +48,15 @@
 </template>
 
 <script>
+  import EventBus from "@/EventBus";
+  import GoodsTools from "@/GoodsTools";
     export default {
       name: "GoodsDetail",
       data(){
         return{
           goodsInfo:'',  //商品详情信息
-          isExist:false
+          isExist:false,
+          pickNum:1     //加入购物车数量
         }
       },
       created(){
@@ -65,11 +68,48 @@
         });
       },
       methods:{
+        //加入购物车逻辑
         insertBall(){
           this.isExist = true;
+
         },
         afterEnter(){
           this.isExist = false; //移除元素
+          //添加到本地存储
+          GoodsTools.add({
+            id:this.goodsInfo.id,
+            num:this.pickNum
+          });
+          // 发射数量给app.vue 也可以写在 inserBall,但是用动画钩子合理
+          let pickNum = GoodsTools.getTolCount();
+          EventBus.$emit('addShopcart',pickNum);
+        },
+        add(){
+          this.pickNum ++
+        },
+        substract(){
+          if(this.pickNum<=1) return;
+          this.pickNum--;
+        },
+        //图文介绍
+        showPhotoInfo(){
+          //编程导航
+          this.$router.push({
+            name:'photo.info',
+            query:{
+              id:this.$route.params.id
+            }
+          })
+        },
+        //商品评论
+        goodsComment(){
+          //编程导航 goods.comment ->使用评论子组件，需要传递商品id
+          this.$router.push({
+            name:'goods.comment',
+            query:{
+              id:this.$route.params.id
+            }
+          })
         }
       }
     }

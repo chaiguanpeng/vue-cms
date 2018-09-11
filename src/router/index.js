@@ -10,7 +10,7 @@ import PhotoList from "@/components/Photo/PhotoList"
 import PhotoDetail from "@/components/Photo/PhotoDetail"
 import GoodsList from "@/components/Goods/GoodsList"
 import GoodsDetail from "@/components/Goods/GoodsDetail"
-
+import GoodsComment from "@/components/Goods/GoodsComment"
 Vue.use(Router); //注册全局组件 router-view route-link
 
 export default new Router({
@@ -73,6 +73,18 @@ export default new Router({
       name:'goods.detail',
       path:'/goods/detail/:id',
       component:GoodsDetail
+    },
+    //商品的图文介绍
+    {
+      name:'photo.info',
+      path:'/goods/photo/info',
+      component:NewsDetail
+    },
+    //商品评论组件
+    {
+      name:'goods.comment',
+      path:'/goods/comment',
+      component:GoodsComment
     }
   ]
 })
