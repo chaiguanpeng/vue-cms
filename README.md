@@ -17,6 +17,11 @@
 - this.$refs.loadmore.onBottomLoaded(); 通知元素重新定位
 ## config/index.js
 - productionSourceMap改成false可以取消打包生成的map文件
+## goodsList中loadmore父元素动态获取
+## 预渲染插件
+- prerender-spa-plugin
+## 骨架屏 百度的lavas
+
 > A Vue.js project
 
 ## Build Setup
